@@ -1,0 +1,13 @@
+secrets/
+*.key
+*.pem
+wg.conf
+*.conf
+*.secret
+
+# Hardware-specific (others can't use this anyway)
+hardware-configuration.nix
+
+# Build results
+result
+result-*

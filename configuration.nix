@@ -39,12 +39,14 @@
   nixarr = {
     enable = true;
     mediaDir = "/media";
-    
+    stateDir = "/media/.state/nixarr";    
+
     jellyfin.enable = true;
     transmission.enable = true;
     radarr.enable = true;
     sonarr.enable = true;
     prowlarr.enable = true;
+    bazarr.enable = true;
   };
 
  #mount media flder 
@@ -55,13 +57,15 @@
   };
 
   #give permission for media folder
-  systemd.tmpfiles.rules = [
-    "d /media 0755 shyam users -"
-    "d /media/movies 0755 shyam users -"
-    "d /media/shows 0755 shyam users -" 
-    "d /media/music 0755 shyam users -"
-  ];
-
+systemd.tmpfiles.rules = [
+  "d /media 0777 shyam users -"
+  "d /media/movies 0777 shyam users -"
+  "d /media/tv 0777 shyam users -"
+ "d /media/shows 0777 shyam users"
+  "d /media/downloads 0777 shyam users"
+  "d /media/downloads/complete 0777 shyam users"
+  "d /media/downloads/incomplete 0777 shyam users"
+];
 
  services.samba = {
     enable = true;
@@ -124,6 +128,7 @@
    kitty.terminfo # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
    wget
    git
+   gh
  ];
 
   # Some programs need SUID wrappers, can be configured further or are
